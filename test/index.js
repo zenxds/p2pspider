@@ -1,21 +1,16 @@
-'use strict';
+'use strict'
+import P2PSpider from '../lib'
 
-var P2PSpider = require('../lib');
+const p2p = new P2PSpider()
 
-var p2p = P2PSpider({
-    nodesMaxSize: 200,   // be careful
-    maxConnections: 400, // be careful
-    timeout: 5000
-});
-
-p2p.ignore(function (infohash, rinfo, callback) {
+p2p.filter((infohash, rinfo) => {
     // false => always to download the metadata even though the metadata is exists.
-    var theInfohashIsExistsInDatabase = false;
-    callback(theInfohashIsExistsInDatabase);
-});
+  const theInfohashIsExistsInDatabase = false
+  return theInfohashIsExistsInDatabase
+})
 
-p2p.on('metadata', function (metadata) {
-    console.log(metadata);
-});
+p2p.on('metadata', (metadata) => {
+  console.log(metadata)
+})
 
-p2p.listen(6881, '0.0.0.0');
+p2p.listen()
