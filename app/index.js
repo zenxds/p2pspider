@@ -10,7 +10,7 @@ p2p.filter(async (infohash, rinfo) => {
       infohash: infohash
     }
   })
-  return !!resource
+  return !resource
 })
 
 /**
