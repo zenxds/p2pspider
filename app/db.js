@@ -12,7 +12,7 @@ const sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.p
 sequelize
 .authenticate()
 .then(function() {
-  console.log('DB Connection has been established successfully.')
+  
 })
 .catch(function (err) {
   console.log('Unable to connect to DB:', err)

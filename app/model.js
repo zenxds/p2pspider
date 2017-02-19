@@ -26,7 +26,7 @@ const Resource = sequelize.define('resource', {
 })
 
 Resource.sync().then(function () {
-  console.log('Resource db sync')
+
 })
 
 export default Resource

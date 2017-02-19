@@ -4,13 +4,13 @@ import Resource from './model'
 
 const p2p = new P2PSpider()
 
-p2p.filter(async (infohash, rinfo) => {
+p2p.filter((infohash, rinfo, cb) => {
   const resource = await Resource.findOne({
     where: {
       infohash: infohash
     }
   })
-  return !resource
+  cb(!!resource)
 })
 
 /**
