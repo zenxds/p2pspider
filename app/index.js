@@ -37,7 +37,7 @@ p2p.on('metadata', async (metadata) => {
   })
 
   if (!created) {
-    instance.update({
+    await instance.update({
       score: instance.get('score') + 1
     })
   }
