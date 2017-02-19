@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize'
 import sequelize from './db'
 
-export default const Resource = sequelize.define('resource', {
+const Resource = sequelize.define('resource', {
   infohash: {
     type: Sequelize.STRING,
     primaryKey: true
@@ -28,3 +28,5 @@ export default const Resource = sequelize.define('resource', {
 Resource.sync().then(function () {
   console.log('Resource db sync')
 })
+
+export default Resource
