@@ -2,7 +2,7 @@ import Sequelize from 'sequelize'
 import config from 'config'
 
 const dbConfig = config.get('db')
-export default const sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, {
+const sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, {
   host: dbConfig.host,
   port: dbConfig.port,
   dialect: dbConfig.dialect
@@ -16,3 +16,5 @@ sequelize
 .catch(function (err) {
   console.log('Unable to connect to DB:', err)
 })
+
+export default sequelize
