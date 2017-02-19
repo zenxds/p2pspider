@@ -11,7 +11,7 @@ p2p.filter((infohash, rinfo) => {
 })
 
 p2p.on('metadata', (metadata) => {
-  console.log(metadata.name.toString('utf8'))
+  console.log(metadata.info.name.toString('utf8'))
 })
 
 p2p.listen()
