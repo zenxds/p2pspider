@@ -1,5 +1,5 @@
 node_modules
 npm-debug.log
 
-config/*.js
-!config/default.js
+config/*.json
+!config/default.json
