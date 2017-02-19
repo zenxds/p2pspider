@@ -11,5 +11,14 @@
       ["dht.transmissionbt.com", 6881]
     ],
     "nodesMaxSize": 4000
+  },
+
+  "db": {
+    "dialect": "mysql",
+    "host": "localhost",
+    "port": "3306",
+    "database": "",
+    "username": "",
+    "password": ""
   }
 }
