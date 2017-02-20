@@ -10,7 +10,7 @@
       ["router.bittorrent.com", 6881],
       ["dht.transmissionbt.com", 6881]
     ],
-    "nodesMaxSize": 4000
+    "nodesMaxSize": 200
   },
 
   "db": {
