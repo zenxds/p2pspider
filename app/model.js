@@ -3,7 +3,8 @@ import sequelize from './db'
 
 const Resource = sequelize.define('resource', {
   id: {
-    type: Sequelize.STRING,
+    type: Sequelize.BIGINT,
+    autoIncrement: true,
     primaryKey: true
   },
 
