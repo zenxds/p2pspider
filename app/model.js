@@ -25,11 +25,6 @@ const Resource = sequelize.define('resource', {
   score: {
     type: Sequelize.BIGINT,
     defaultValue: 0
-  },
-
-  metadata: {
-    type: Sequelize.TEXT,
-    allowNull: false
   }
 },  {
   freezeTableName: true,
