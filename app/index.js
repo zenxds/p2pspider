@@ -32,6 +32,7 @@ p2p.on('metadata', async (metadata) => {
     defaults: {
       magnet: metadata.magnet,
       name: metadata.info.name.toString('utf8'),
+      metadata: JSON.stringify(metadata)
       score: 0
     }
   })
