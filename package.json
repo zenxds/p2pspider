@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "DEBUG=false NODE_ENV=prod pm2 start --interpreter babel-node --name p2pspider app/index.js",
-    "test": "DEBUG=true babel-node app/index.js"
+    "test": "DEBUG=true NODE_ENV=prod babel-node app/index.js"
   },
   "dependencies": {
     "bencode": "^0.11.0",
