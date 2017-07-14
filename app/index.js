@@ -4,7 +4,7 @@ import Resource from './model'
 
 const p2p = new P2PSpider()
 
-p2p.filter(async (infohash, rinfo) => {
+p2p.filter(async(infohash, rinfo) => {
   const resource = await Resource.findOne({
     where: {
       infohash: infohash
@@ -23,7 +23,7 @@ p2p.filter(async (infohash, rinfo) => {
  * info.piece length
  * info.pieces
  */
-p2p.on('metadata', async (metadata) => {
+p2p.on('metadata', async(metadata) => {
   const [instance, created] = await Resource.findOrCreate({
     where: {
       infohash: metadata.infohash

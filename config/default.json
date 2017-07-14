@@ -1,7 +1,7 @@
 {
   "btConfig": {
     "timeout": 10000,
-    "maxConnections": 200
+    "maxConnections": 10
   },
   "dhtConfig": {
     "address": "0.0.0.0",
@@ -10,7 +10,7 @@
       ["router.bittorrent.com", 6881],
       ["dht.transmissionbt.com", 6881]
     ],
-    "nodesMaxSize": 200
+    "nodesMaxSize": 10
   },
 
   "db": {

@@ -11,10 +11,9 @@ const sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.p
 
 sequelize
 .authenticate()
-.then(function() {
-  
+.then(() => {
 })
-.catch(function (err) {
+.catch((err) => {
   console.log('Unable to connect to DB:', err)
 })
 

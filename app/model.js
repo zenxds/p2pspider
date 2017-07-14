@@ -35,7 +35,7 @@ const Resource = sequelize.define('resource', {
   }]
 })
 
-Resource.sync().then(function () {
+Resource.sync().then(() => {
 
 })
 
