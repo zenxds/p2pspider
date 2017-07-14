@@ -8,7 +8,7 @@
     "url": "https://github.com/zenxds/p2pspider/issues"
   },
   "scripts": {
-    "start": "DEBUG=false pm2 start --interpreter babel-node app/index.js",
+    "start": "DEBUG=false pm2 start --interpreter babel-node --name p2pspider app/index.js",
     "test": "DEBUG=true babel-node app/index.js"
   },
   "dependencies": {
