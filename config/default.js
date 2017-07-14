@@ -1,4 +1,4 @@
-{
+module.exports = {
   "btConfig": {
     "timeout": 10000,
     "maxConnections": 10
