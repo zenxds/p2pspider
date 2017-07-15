@@ -33,31 +33,29 @@ const p2p = new P2PSpider({
  * info.pieces
  */
 p2p.on('metadata', async(metadata) => {
-  // metadata = bencode.decode(metadata)
-  // console.log(metadata)
-  // const name = metadata.info.name.toString('utf8')
+  const name = metadata.info.name.toString('utf8')
 
-  // // 只保存中文资源
-  // if (!/[\u4e00-\u9fa5]/.test(name)) {
-  //   return
-  // }
+  // 只保存中文资源
+  if (!/[\u4e00-\u9fa5]/.test(name)) {
+    return
+  }
   
-  // const [instance, created] = await Resource.findOrCreate({
-  //   where: {
-  //     infohash: metadata.infohash
-  //   },
+  const [instance, created] = await Resource.findOrCreate({
+    where: {
+      infohash: metadata.infohash
+    },
 
-  //   defaults: {
-  //     magnet: metadata.magnet,
-  //     name: name,
-  //     score: 0
-  //   }
-  // })
+    defaults: {
+      magnet: metadata.magnet,
+      name: name,
+      score: 0
+    }
+  })
 
-  // if (!created) {
-  //   // 多次下载的资源分数 + 1
-  //   await instance.update({
-  //     score: instance.get('score') + 1
-  //   })
-  // }
+  if (!created) {
+    // 多次下载的资源分数 + 1
+    await instance.update({
+      score: instance.get('score') + 1
+    })
+  }
 })
