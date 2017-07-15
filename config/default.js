@@ -1,7 +1,7 @@
 module.exports = {
   "btConfig": {
     "timeout": 10000,
-    "maxConnections": 20
+    "maxConnections": 10
   },
   "dhtConfig": {
     "address": "0.0.0.0",
@@ -10,9 +10,8 @@ module.exports = {
       ["router.bittorrent.com", 6881],
       ["dht.transmissionbt.com", 6881]
     ],
-    "nodesMaxSize": 20
+    "maxNodesSize": 8
   },
-
   "db": {
     "dialect": "mysql",
     "host": "localhost",
