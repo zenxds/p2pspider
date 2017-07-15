@@ -1,6 +1,5 @@
 'use strict'
 import config from 'config'
-import bencode from 'bencode'
 import P2PSpider from '../lib'
 import Resource from './model'
 
@@ -34,8 +33,8 @@ const p2p = new P2PSpider({
  * info.pieces
  */
 p2p.on('metadata', async(metadata) => {
-  metadata = bencode.decode(metadata)
-  console.log(metadata)
+  // metadata = bencode.decode(metadata)
+  // console.log(metadata)
   // const name = metadata.info.name.toString('utf8')
 
   // // 只保存中文资源
