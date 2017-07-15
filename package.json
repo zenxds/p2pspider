@@ -14,10 +14,12 @@
   "dependencies": {
     "bencode": "^0.11.0",
     "bitfield": "^1.1.2",
+    "bittorrent-protocol": "^2.2.3",
     "config": "^1.26.1",
     "mysql": "^2.13.0",
     "pm2": "^2.5.0",
-    "sequelize": "^3.30.4"
+    "sequelize": "^3.30.4",
+    "ut_metadata": "^3.0.11"
   },
   "keywords": [
     "torrent",
