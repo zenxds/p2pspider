@@ -36,7 +36,7 @@ p2p.on('metadata', async(metadata) => {
   const name = metadata.info.name.toString('utf8')
 
   // 只保存中文资源
-  if (!/[\u4e00-\u9fa5]/.test(metadata.info.name)) {
+  if (!/[\u4e00-\u9fa5]/.test(name)) {
     return
   }
   
