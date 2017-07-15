@@ -1,7 +1,7 @@
 {
   "name": "p2pspider",
   "description": "DHT Spider + BitTorrent Client = P2P Spider",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "repository": "https://github.com/zenxds/p2pspider",
   "main": "lib/index.js",
   "bugs": {
@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "bencode": "^0.11.0",
-    "bitfield": "^1.1.2",
     "bittorrent-protocol": "^2.2.3",
     "config": "^1.26.1",
     "mysql": "^2.13.0",
