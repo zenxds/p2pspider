@@ -10,6 +10,7 @@ const p2p = new P2PSpider({
   port: dhtConfig.port,
   bootstrapNodes: dhtConfig.bootstrapNodes,
   maxNodesSize: dhtConfig.maxNodesSize,
+  replyFindNode: dhtConfig.replyFindNode,
   maxConnections: btConfig.maxConnections,
   timeout: btConfig.timeout,
   filter: async(infohash) => {

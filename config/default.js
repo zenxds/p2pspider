@@ -6,6 +6,7 @@ module.exports = {
   "dhtConfig": {
     "address": "0.0.0.0",
     "port": 6881,
+    "replyFindNode": true,
     "bootstrapNodes": [
       ["router.bittorrent.com", 6881],
       ["dht.transmissionbt.com", 6881]
