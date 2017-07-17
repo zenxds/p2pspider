@@ -1,7 +1,11 @@
 'use strict'
 import config from 'config'
+import redis from 'redis-promisify'
 import P2PSpider from '../lib'
 import Resource from './model'
+
+const redisClient = redis.createClient(config.get('redis'))
+const RESOURCE_EN = 'resource_en'
 
 const btConfig = config.get('btConfig')
 const dhtConfig = config.get('dhtConfig')
@@ -19,7 +23,18 @@ const p2p = new P2PSpider({
         infohash: infohash
       }
     })
-    return !!resource
+    if (resource) {
+      await resource.increment('score', { by: 1 })
+      return true
+    }
+
+    // 是英文资源
+    const isEn = await redisClient.hexistsAsync(RESOURCE_EN, infohash)
+    if (isEn) {
+      return true
+    }
+
+    return false
   }
 })
 
@@ -36,12 +51,13 @@ const p2p = new P2PSpider({
 p2p.on('metadata', async(metadata) => {
   const name = metadata.info.name.toString('utf8')
 
-  // 只保存中文资源
+  // 只保存中文资源，同时记录该infohash为英文
   if (!/[\u4e00-\u9fa5]/.test(name)) {
+    await redisClient.hsetAsync(RESOURCE_EN, metadata.infohash, '1')
     return
   }
   
-  const [instance, created] = await Resource.findOrCreate({
+  const [resource, created] = await Resource.findOrCreate({
     where: {
       infohash: metadata.infohash
     },
@@ -55,8 +71,6 @@ p2p.on('metadata', async(metadata) => {
 
   if (!created) {
     // 多次下载的资源分数 + 1
-    await instance.update({
-      score: instance.get('score') + 1
-    })
+    await resource.increment('score', { by: 1 })
   }
 })
