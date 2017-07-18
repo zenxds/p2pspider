@@ -2,7 +2,7 @@ import Sequelize from 'sequelize'
 import sequelize from './db'
 
 const getResourceModel = (table) => {
-  return sequelize.define('table', {
+  return sequelize.define(table, {
     id: {
       type: Sequelize.BIGINT,
       autoIncrement: true,
