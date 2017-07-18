@@ -2,13 +2,26 @@
 import config from 'config'
 import redis from 'redis-promisify'
 import P2PSpider from '../lib'
-import Resource from './model'
+import {
+  Resource,
+  ResourceEn
+} from './model'
 
 const redisClient = redis.createClient(config.get('redis'))
-const RESOURCE_EN = 'resource_en'
-
 const btConfig = config.get('btConfig')
 const dhtConfig = config.get('dhtConfig')
+const getResource = async(infohash, isCN) => {
+  const resource = await [isCN ? Resource : ResourceEn].findOne({
+    where: {
+      infohash: infohash
+    }
+  })
+  if (resource) {
+    await resource.increment('score', { by: 1 })
+    return resource
+  }
+}
+
 const p2p = new P2PSpider({
   address: dhtConfig.address,
   port: dhtConfig.port,
@@ -18,19 +31,15 @@ const p2p = new P2PSpider({
   maxConnections: btConfig.maxConnections,
   timeout: btConfig.timeout,
   filter: async(infohash) => {
-    const resource = await Resource.findOne({
-      where: {
-        infohash: infohash
-      }
-    })
+    let resource
+
+    resource = await getResource(infohash, true)
     if (resource) {
-      await resource.increment('score', { by: 1 })
       return true
     }
 
-    // 是英文资源
-    const isEn = await redisClient.hexistsAsync(RESOURCE_EN, infohash)
-    if (isEn) {
+    resource = await getResource(infohash, false)
+    if (resource) {
       return true
     }
 
@@ -48,16 +57,15 @@ const p2p = new P2PSpider({
  * info.piece length
  * info.pieces
  */
+const RESOURCE_EN = 'resource_en'
+const RESOURCE_CN = 'resource_cn'
 p2p.on('metadata', async(metadata) => {
   const name = metadata.info.name.toString('utf8')
 
-  // 只保存中文资源，同时记录该infohash为英文
-  if (!/[\u4e00-\u9fa5]/.test(name)) {
-    await redisClient.hsetAsync(RESOURCE_EN, metadata.infohash, '1')
-    return
-  }
+  const isCN = /[\u4e00-\u9fa5]/.test(name)
+  await redisClient.hsetAsync(isCN ? RESOURCE_CN : RESOURCE_EN, metadata.infohash, '1')
   
-  const [resource, created] = await Resource.findOrCreate({
+  const [resource, created] = await [isCN ? Resource : ResourceEn].findOrCreate({
     where: {
       infohash: metadata.infohash
     },
