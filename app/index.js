@@ -11,7 +11,7 @@ const redisClient = redis.createClient(config.get('redis'))
 const btConfig = config.get('btConfig')
 const dhtConfig = config.get('dhtConfig')
 const getResource = async(infohash, isCN) => {
-  const resource = await [isCN ? Resource : ResourceEn].findOne({
+  const resource = await (isCN ? Resource : ResourceEn).findOne({
     where: {
       infohash: infohash
     }
@@ -65,7 +65,7 @@ p2p.on('metadata', async(metadata) => {
   const isCN = /[\u4e00-\u9fa5]/.test(name)
   await redisClient.hsetAsync(isCN ? RESOURCE_CN : RESOURCE_EN, metadata.infohash, '1')
   
-  const [resource, created] = await [isCN ? Resource : ResourceEn].findOrCreate({
+  const [resource, created] = await (isCN ? Resource : ResourceEn).findOrCreate({
     where: {
       infohash: metadata.infohash
     },
